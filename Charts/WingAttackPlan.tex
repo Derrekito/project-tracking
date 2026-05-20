@@ -1,0 +1,102 @@
+% RADCaST -----------------------------------------------------------------------
+\begin{ganttchart}{\chartstart}{\chartend}
+
+%\gantttitlecalendar{year, month=name, day} \\
+\gantttitlecalendar{month=name, day} \\
+
+
+
+\ganttgroup{SEU Detection Software}{2025-06-23}{2025-08-05} \\
+\assignedtask{cpu\_cache\_test.c}{2025-06-23}{2025-07-11}{90}{DL}[cm0] \\
+\assignedtask{string\_utils.c}{2025-06-23}{2025-07-11}{99}{DL}[cm1] \\
+\assignedtask{cpu\_print.c}{2025-06-23}{2025-07-11}{99}{DL}[cm2] \\
+\assignedtask{uart.c}{2025-06-23}{2025-07-11}{90}{DL}[cm3] \\
+\assignedtask{Makefile}{2025-06-23}{2025-07-11}{90}{DL}[make0] \\
+
+
+\\[grid]
+\assignedtask{Cache adjustments for MPSoC}{2025-07-14}{2025-07-18}{0}{DL}[softFin] \\
+\ganttlink{cm0}{softFin}
+\assignedtask{Unit tests: uprintf}{2025-07-14}{2025-08-05}{0}{DL}[utest0] \\
+\assignedtask{Unit tests: checkAndSet}{2025-07-14}{2025-08-05}{0}{DL}[utest1] \\
+\assignedtask{Binary Artifact Inspection}{2025-07-14}{2025-08-05}{20}{DL}[utest] \\
+\ganttlink{cm0}{utest0}
+\ganttlink{cm0}{utest1}
+
+\\[grid]
+\ganttgroup{MongoDB Serv\ \ \ \ \ }{2025-06-22}{2025-06-22} \\
+\assignedtask{DB verification scripts}{2025-07-29}{2025-08-05}{0}{DL}[DBcheck] \\
+\ganttlink{cm0}{DBcheck}
+\assignedtask{DB Query Python Scripts}{2025-06-22}{2025-06-22}{0}{DL} \\
+
+\\[grid]
+\ganttgroup{Pacs Serv \ \ \ \ \ }{2025-06-22}{2025-06-22} \\
+\assignedtask{MQTT Migration}{2025-06-22}{2025-06-22}{0}{MF} \\
+\assignedtask{Dash Migration}{2025-06-22}{2025-06-22}{0}{MF} \\
+
+
+\\[grid]
+\ganttgroup{MQTT Ingest Serv \ \ \ \ \ }{2025-06-22}{2025-06-22} \\
+\assignedtask{MQTT-to-MongoDB scripts}{2025-07-14}{2025-08-05}{80}{DL}[ingest] \\
+\ganttlink{cm0}{ingest}
+
+\\[grid]
+\ganttgroup{DUT Ingest Serv \ \ \ \ \ }{2025-06-22}{2025-06-22} \\
+\assignedtask{Raw MQTT channel}{2025-06-22}{2025-06-22}{0}{DL} \\
+\assignedtask{Contingency Dump Files}{2025-06-22}{2025-06-22}{0}{DL} \\
+\\[grid]
+\assignedtask{Design Msg Handler FSM}{2025-06-22}{2025-06-22}{0}{DL} \\
+\assignedtask{Test Run Tracking Schema}{2025-06-22}{2025-06-22}{0}{DL} \\
+\assignedtask{Detect and store Boot}{2025-07-09}{2025-08-05}{0}{DL} \\
+\assignedtask{Detect and store Kernel Dump}{2025-07-09}{2025-08-05}{0}{DL} \\
+\assignedtask{Handle Malformed messages}{2025-06-22}{2025-06-22}{0}{DL} \\
+\assignedtask{Identify all message types}{2025-06-22}{2025-06-22}{0}{DL} \\
+\assignedtask{HARDEN YAML-to-JSON}{2025-06-22}{2025-06-22}{0}{DL} \\
+
+\\[grid]
+\ganttgroup{DUT Sim Serv \ \ \ \ \ }{2025-06-22}{2025-06-22} \\
+\assignedtask{DUT Sim container}{2025-07-09}{2025-07-18}{50}{DL}[DUTEMU] \\
+\ganttlink{cm0}{DUTEMU}
+\assignedtask{Sim Boot messages}{2025-07-08}{2025-07-08}{0}{DL}[DUTEMU2] \\
+\assignedtask{Sim Kernel Dumps}{2025-07-08}{2025-07-08}{0}{DL}[DUTEMU3] \\
+\assignedtask{Sim malformed Data}{2025-06-22}{2025-06-22}{0}{DL}[DUTEMU4] \\
+
+
+\\[grid]
+\ganttgroup{Dash Serv \ \ \ \ \ }{2025-06-22}{2025-06-22} \\
+\assignedtask{layout.py}{2025-06-22}{2025-06-22}{20}{DL} \\
+\assignedtask{Plotly view for PACS data}{2025-07-22}{2025-07-22}{50}{DL}[PACSPLOT] \\
+\assignedtask{Plotly view for DUT data}{2025-07-18}{2025-08-05}{0}{DL}[DUTPLOT] \\
+\ganttlink{DUTEMU}{DUTPLOT}
+
+\\[grid]
+\ganttgroup{NTP Serv \ \ \ \ \ }{2025-06-22}{2025-06-22} \\
+\assignedtask{Setup NTP Server}{2025-07-21}{2025-08-05}{0}{DL}[NTP] \\
+\assignedtask{Timekeeping with GPS module}{2025-07-21}{2025-08-05}{0}{DL}[gps] \\
+
+\\[grid]
+\ganttgroup{Misc}{2025-06-23}{2025-08-05} \\
+\assignedtask{Create DUT Sim}{2025-07-08}{2025-07-09}{90}{DL}[rc0]\\
+\assignedtask{Docker Container testing}{2025-07-14}{2025-07-18}{0}{DL}[agx3] \\
+\assignedtask{Install on AGX}{2025-07-07}{2025-07-11}{0}{DL}[agx1] \\
+\assignedtask{AGX testing; bugfixes}{2025-07-21}{2025-07-25}{0}{DL}[agx2] \\
+
+\ganttlink{agx3}{agx2}
+\ganttlink{agx1}{agx2}
+\ganttlink{agx1}{gps}
+
+\\[grid]
+\ganttgroup{Documentation}{2025-06-23}{2025-08-05} \\
+\assignedtask{README.md}{2025-06-22}{2025-08-05}{60}{DL} \\
+\assignedtask{Dash}{2025-06-22}{2025-06-22}{30}{DL} \\
+\assignedtask{MQTT}{2025-06-22}{2025-06-22}{50}{DL} \\
+\assignedtask{MQTT Ingest}{2025-06-22}{2025-06-22}{0}{DL} \\
+\assignedtask{DUT Ingest}{2025-06-22}{2025-06-22}{0}{DL} \\
+\assignedtask{DUT Sim}{2025-06-22}{2025-06-22}{0}{DL} \\
+\assignedtask{Pacs Sim}{2025-06-22}{2025-06-22}{0}{DL} \\
+\assignedtask{NTP}{2025-06-22}{2025-06-22}{0}{DL} \\
+\assignedtask{CPU SEU Test Software Report}{2025-06-22}{2025-06-22}{0}{DL} \\
+\assignedtask{CPU SEU Test Doxygen Documentation}{2025-06-22}{2025-07-11}{90}{DL} \\
+
+\ganttvrule{PROJECT DEADLINE}{2025-08-15}
+\end{ganttchart}

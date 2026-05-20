@@ -1,0 +1,160 @@
+\makeatletter
+\patchcmd{\endganttchart}
+  {\ifgtt@vgrid}
+  {\gtt@before@grid\ifgtt@vgrid}
+  {}{}
+\patchcmd{\endganttchart}
+  {\def\@tempa{none}}
+  {\gtt@after@grid\def\@tempa{none}}
+  {}{}
+
+\newif\ifgtt@vgrid@weekend
+\gtt@vgrid@weekendfalse
+
+\newcommand*{\gtt@vgridweek@assemblestyle}{%
+  \ifgtt@vgrid\ifgtt@vgrid@weekend
+    \pgfcalendarjuliantoweekday{\gtt@startjulian}{\@tempcntb}%
+    \ifcase\@tempcntb
+      \edef\gtt@vgridstyle{*4{\gtt@vgridstyle@week},*1{\gtt@vgridstyle@weekend},*1{\gtt@vgridstyle@week},*1{\gtt@vgridstyle@weekend}}%
+    \or \edef\gtt@vgridstyle{*3{\gtt@vgridstyle@week},*1{\gtt@vgridstyle@weekend},*1{\gtt@vgridstyle@week},*1{\gtt@vgridstyle@weekend},*1{\gtt@vgridstyle@week}}%
+    \or \edef\gtt@vgridstyle{*2{\gtt@vgridstyle@week},*1{\gtt@vgridstyle@weekend},*1{\gtt@vgridstyle@week},*1{\gtt@vgridstyle@weekend},*2{\gtt@vgridstyle@week}}%
+    \or \edef\gtt@vgridstyle{*1{\gtt@vgridstyle@week},*1{\gtt@vgridstyle@weekend},*1{\gtt@vgridstyle@week},*1{\gtt@vgridstyle@weekend},*3{\gtt@vgridstyle@week}}%
+    \or \edef\gtt@vgridstyle{*1{\gtt@vgridstyle@weekend},*1{\gtt@vgridstyle@week},*1{\gtt@vgridstyle@weekend},*4{\gtt@vgridstyle@week}}%
+    \or \edef\gtt@vgridstyle{*1{\gtt@vgridstyle@week},*1{\gtt@vgridstyle@weekend},*4{\gtt@vgridstyle@week},*1{\gtt@vgridstyle@weekend}}%
+    \or \edef\gtt@vgridstyle{*1{\gtt@vgridstyle@weekend},*4{\gtt@vgridstyle@week},*1{\gtt@vgridstyle@weekend},*1{\gtt@vgridstyle@week}}%
+    \fi
+  \fi\fi
+}
+
+\newcommand*{\gtt@altrow@background}{surface}
+
+\newcommand*{\gtt@altrow@draw}{%
+  % Draw alternating row backgrounds
+  \pgfmathsetmacro{\rowheight}{\ganttvalueof{y unit chart}}%
+  \pgfmathtruncatemacro{\numrows}{-\y@lower/\rowheight}%
+  \foreach \row in {0,...,\numrows} {%
+    \pgfmathtruncatemacro{\isodd}{mod(\row,2)}%
+    \ifnum\isodd=1\relax
+      \fill[\gtt@altrow@background]
+        (0, -\row*\rowheight pt) rectangle
+        (\gtt@chartwidth*\ganttvalueof{x unit}, -\row*\rowheight pt - \rowheight pt);%
+    \fi
+  }%
+}
+
+\newcommand*{\gtt@weekend@draw}{%
+  \def\@tempa{none}%
+  \ifx\gtt@weekend@background\@tempa\else
+    \pgfcalendarjuliantoweekday{\gtt@startjulian}{\@tempcntb}%
+    \global\advance\gtt@chartwidth by-1\relax%
+    \foreach \x in {0,...,\gtt@chartwidth} {%
+      \pgfmathsetcount{\@tempcnta}{mod(\x+\@tempcntb,7)}%
+      \ifnum\@tempcnta>4\relax
+        \expandafter\fill\expandafter[\gtt@weekend@background]
+          (\x * \ganttvalueof{x unit}, \y@upper pt) rectangle
+          (\x * \ganttvalueof{x unit} + \ganttvalueof{x unit}, \y@lower pt);%
+      \fi
+    }%
+    \global\advance\gtt@chartwidth by1\relax%
+    \node [/pgfgantt/canvas, minimum width=\x@size pt,
+      minimum height=\y@size pt, fill=none]
+      at (\x@size pt / 2, \y@mid pt) {};%
+  \fi
+}
+
+\newcommand*{\gtt@before@grid}{\gtt@vgridweek@assemblestyle\gtt@weekend@draw}
+\newcommand*{\gtt@after@grid}{}
+\ganttset{
+  vgridweek/.code 2 args = {%
+    \gtt@vgridtrue\gtt@vgrid@weekendtrue
+    \def\gtt@vgridstyle@week{#1}%
+    \def\gtt@vgridstyle@weekend{#2}%
+  },
+  weekend background/.store in = \gtt@weekend@background,
+  weekend background = surface,
+}
+\makeatother
+
+
+\newcommand{\leave}[3]{%
+  \ganttbar{#1}{#2}{#3}%
+}
+
+\newcommand{\sectionsep}{%
+  \ganttnewline[draw=subtle, line width=1.2pt]%
+}
+
+\NewDocumentCommand{\assignedtask}{m m m m m o}{%
+  \ganttbar[
+    progress=#4,
+    progress label text={\scriptsize #4\%},
+    name={#6}, % label name for reference
+    bar label font=\mdseries\small
+  ]{#1 (#5)}{#2}{#3}
+}
+
+% Usage example for \assignedtask command with dependencies
+% \assignedtask{<task name>}{<start date>}{<end date>}{<progress>}{<assignee>}[<task ID>]
+% Use [task ID] to name tasks for linking dependencies
+% \ganttlink[link type=<type>]{<from>}{<to>} to define dependencies
+% Example:
+% \assignedtask{0.1 Purpose}{2025-10-05}{2025-10-05}{0}{Unassigned}[task1] % Define task 1
+% \assignedtask{0.2 Scope}{2025-10-06}{2025-10-06}{0}{Unassigned}[task2] % Define task 2
+% \assignedtask{0.3 Objectives}{2025-10-07}{2025-10-07}{0}{Unassigned}[task3] % Define task 3
+% \ganttlink[link type=f-s]{task1}{task2} % Scope starts after Purpose finishes
+% \ganttlink[link type=s-s]{task2}{task3} % Objectives starts when Scope starts
+
+
+\setganttlinklabel{s-s}{START-TO-START}
+\setganttlinklabel{f-s}{FINISH-TO-START}
+\setganttlinklabel{f-f}{FINISH-TO-FINISH}
+
+\ganttset{
+  time slot unit=day,
+  time slot format=isodate,
+  x unit=1.1cm,
+  y unit chart=1.3cm,
+  y unit title=0.5cm,
+  bar height=0.4,
+  bar top shift=0.5,
+  canvas/.append style={fill=base, draw=overlay, line width=.75pt},
+  hgrid,
+  hgrid style/.style={draw=overlay, line width=.5pt, dotted},
+  vgrid={*1{draw=overlay, line width=.5pt, dotted}},
+  group top shift=.4,
+  newline shortcut=true,
+  chart element start border=left,
+  newline row separator style/.style={draw=subtle, line width=1pt},
+  today=\todayISO,
+  today rule/.style={
+    draw=gold,
+    dash pattern=on 3.5pt off 4.5pt,
+    line width=1.5pt
+  },
+  today label font=\small\bfseries\color{gold},
+  title/.style={draw=none, fill=none},
+  title label font=\bfseries\footnotesize\color{text},
+  title label node/.append style={below=7pt},
+  include title in canvas=false,
+  bar label font=\mdseries\normalsize\color{text},
+  bar inline label node/.style={font=\mdseries\small, anchor=south west, yshift=0.4cm},
+  bar inline label anchor=south west,
+  bar/.append style={draw=subtle, line width=0.5pt, fill=foam},
+  bar incomplete/.append style={fill=foam!40},
+  bar progress label font=\mdseries\footnotesize\color{muted},
+  group incomplete/.append style={fill=iris!30},
+  group left shift=0,
+  group right shift=0,
+  group height=1,
+  group top shift=0,
+  group peaks tip position=0,
+  group/.append style={draw=none, fill=iris},
+  group label font=\bfseries\normalsize\color{text},
+  group inline label node/.append style={anchor=center},
+  group inline label anchor=center,
+  inline,
+  group progress label font=\bfseries\small\color{base},
+  link/.style={-latex, line width=1.5pt, love, rounded corners=3pt},
+  link label font=\scriptsize\bfseries\color{love},
+  link label node/.append style={below left=-2pt and 0pt}
+}

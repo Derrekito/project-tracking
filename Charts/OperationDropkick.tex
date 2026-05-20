@@ -1,0 +1,41 @@
+% Operation Dropkick: Briefing the President
+% War Room: Situation Room A
+% Briefing deadline: March 16, 2026
+\begin{ganttchart}{\chartstart}{\chartend}
+
+\gantttitlecalendar{month=name, day} \\
+
+\ganttgroup{Presentation Preparation}{2026-01-05}{2026-02-14} \\
+\assignedtask{Big Board graphics update}{2026-01-05}{2026-01-10}{100}{PP}[bigboard] \\
+\assignedtask{Slide deck compilation}{2026-01-05}{2026-01-10}{100}{PP}[deck] \\
+\assignedtask{32 Megaton yield slide}{2026-01-20}{2026-02-07}{0}{BT}[mt32] \\
+\ganttlink{bigboard}{mt32}
+\assignedtask{Content review by Joint Chiefs}{2026-02-03}{2026-02-14}{0}{PP}[review] \\
+\ganttlink{deck}{review}
+
+\\[grid]
+\ganttgroup{Nuclear Strike Analysis}{2026-01-14}{2026-01-24} \\
+\assignedtask{Target error classification}{2026-01-14}{2026-01-17}{90}{DS} \\
+\assignedtask{Warhead health assessment}{2026-01-14}{2026-01-17}{90}{DS} \\
+\assignedtask{Fallout pattern sanitization}{2026-01-14}{2026-01-17}{90}{DS} \\
+\assignedtask{Blast radius extraction}{2026-01-20}{2026-01-24}{90}{DS} \\
+\assignedtask{Ground zero boundary marking}{2026-01-20}{2026-01-24}{90}{DS} \\
+
+\\[grid]
+\ganttgroup{Strategic Methodology}{2026-02-16}{2026-03-13} \\
+\assignedtask{B-52 bomber deployment hierarchy}{2026-02-16}{2026-02-27}{80}{GC} \\
+\assignedtask{Identical payload distribution}{2026-02-16}{2026-02-27}{80}{GC} \\
+\assignedtask{Per-wing attribution algorithm}{2026-02-23}{2026-03-06}{70}{GC} \\
+\assignedtask{Soviet retaliation predictions}{2026-03-02}{2026-03-13}{0}{DS}[soviet] \\
+
+\\[grid]
+\ganttgroup{Polish \& Deliver}{2026-03-16}{2026-04-05} \\
+\assignedtask{Remove TOP SECRET watermark}{2026-03-16}{2026-03-18}{0}{PP} \\
+\assignedtask{War Room slides review}{2026-03-16}{2026-03-20}{0}{PP} \\
+\assignedtask{Classified bibliography cleanup}{2026-03-20}{2026-03-27}{0}{PP} \\
+\assignedtask{Final security review}{2026-03-27}{2026-04-03}{0}{PP}[final] \\
+\ganttlink{soviet}{final}
+\assignedtask{Brief President Muffley}{2026-04-03}{2026-04-05}{0}{PP}[brief] \\
+\ganttlink{final}{brief}
+
+\end{ganttchart}

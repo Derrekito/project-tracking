@@ -1,0 +1,13 @@
+\usepackage{pgfgantt}
+\usepackage{pgfcalendar}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{etoolbox}
+\usepackage[useregional]{datetime2}
+\newcommand{\todayISO}{\DTMdisplaydate{\year}{\month}{\day}{-1}}
+
+% Apply Rose Pine Moon theme globally after colors are loaded
+\AtBeginDocument{%
+  \pagecolor{base}%
+  \color{text}%
+}

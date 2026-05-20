@@ -1,0 +1,158 @@
+\begin{ganttchart}{\chartstart}{\chartend}
+
+\gantttitlecalendar{month=name, week} \\
+
+% Bomber Wing Readiness ----------------------------------------------------------
+\sectionsep
+\ganttgroup{1. Bomber Wing Readiness}{2026-01-05}{2026-01-12} \\
+\assignedtask{B-52 pre-flight checklist automation}{2026-01-05}{2026-01-05}{100}{GC}[b52-pre] \\
+\assignedtask{Fail-safe authenticator codes}{2026-01-05}{2026-01-05}{100}{GC}[auth-codes] \\
+\assignedtask{Wing attack profile validation}{2026-01-06}{2026-01-07}{100}{GC}[wing-valid] \\
+\assignedtask{Test nuclear payload delivery}{2026-01-07}{2026-01-07}{100}{GC}[nuke-test] \\
+\assignedtask{Bomber crew rotation schedule}{2026-01-09}{2026-01-09}{100}{GC}[crew-rot] \\
+\assignedtask{AGX command post configuration}{2026-01-12}{2026-01-12}{100}{GC}[agx-config] \\
+\assignedtask{Strategic early warning integration}{2026-01-12}{2026-01-12}{100}{GC}[early-warn] \\
+\assignedtask{Chain of command protocols}{2026-01-12}{2026-01-12}{100}{GC}[chain-cmd] \\
+
+% CRM-114 Discriminator ----------------------------------------------------------
+\sectionsep
+\ganttgroup{2. CRM-114 Discriminator}{2026-01-05}{2026-01-07} \\
+\assignedtask{Recall code cipher modernization}{2026-01-05}{2026-01-05}{100}{GC}[recall-cipher] \\
+\assignedtask{Three-letter code validation}{2026-01-05}{2026-01-05}{100}{GC}[3letter] \\
+\assignedtask{Radio prefix authentication}{2026-01-05}{2026-01-07}{100}{GC}[radio-auth] \\
+\ganttlink{recall-cipher}{3letter}
+\ganttlink{3letter}{radio-auth}
+
+% Doomsday Device Integration ----------------------------------------------------
+\sectionsep
+\ganttgroup{3. Doomsday Device Integration}{2026-01-05}{2026-01-30} \\
+\assignedtask{Design cobalt-thorium G interface}{2026-01-12}{2026-01-30}{10}{AM}[doomsday-if] \\
+\assignedtask{Automated detonation triggers}{2026-01-12}{2026-01-30}{0}{AM}[auto-det] \\
+\assignedtask{Fail-deadly subsystem tests}{2026-01-12}{2026-01-30}{0}{AM}[fail-deadly] \\
+\assignedtask{Isotope purity validation}{2026-01-13}{2026-01-30}{0}{AM}[isotope] \\
+\ganttlink{doomsday-if}{auto-det}
+\ganttlink{auto-det}{fail-deadly}
+\ganttlink{fail-deadly}{isotope}
+
+% War Room Communication ---------------------------------------------------------
+\sectionsep
+\ganttgroup{4. War Room Communication}{2026-01-05}{2026-01-07} \\
+\assignedtask{Big Board telemetry updates}{2026-01-05}{2026-01-05}{100}{PP}[big-board] \\
+\assignedtask{Hotline to Premier Kissov}{2026-01-05}{2026-01-06}{100}{PP}[hotline] \\
+\assignedtask{President Muffley briefing system}{2026-01-06}{2026-01-07}{100}{PP}[muffley] \\
+
+% Target Selection Methodology ---------------------------------------------------
+\sectionsep
+\ganttgroup[name=grp-targets]{5. Target Selection Methodology}{2026-01-05}{2026-01-08} \\
+\assignedtask{Primary target coordinates}{2026-01-05}{2026-01-05}{100}{GC}[primary] \\
+\assignedtask{Secondary target failover}{2026-01-05}{2026-01-06}{100}{GC}[secondary] \\
+\assignedtask{Missile gap analysis}{2026-01-06}{2026-01-07}{100}{GC}[missile-gap] \\
+\assignedtask{Mineshaft gap calculations}{2026-01-07}{2026-01-08}{100}{GC}[mineshaft] \\
+
+% Base Security Protocols --------------------------------------------------------
+\sectionsep
+\ganttgroup[name=grp-security]{6. Base Security Protocols}{2026-01-05}{2026-01-30} \\
+\assignedtask{Burpelson AFB perimeter}{2026-01-05}{2026-01-05}{100}{JR}[perimeter] \\
+\assignedtask{Precious bodily fluids protection}{2026-01-05}{2026-01-05}{100}{JR}[fluids] \\
+\assignedtask{Fluoridation countermeasures}{2026-01-05}{2026-01-05}{100}{JR}[fluoride] \\
+\assignedtask{Communist infiltration detection}{2026-01-05}{2026-01-05}{100}{JR}[commie] \\
+\assignedtask{Deny women your essence protocol}{2026-01-09}{2026-01-09}{100}{JR}[essence] \\
+\assignedtask{Burpelson lockdown procedures}{2026-01-05}{2026-01-06}{100}{JR}[lockdown] \\
+\assignedtask{Recall code safeguarding}{2026-01-06}{2026-01-07}{100}{JR}[recall-safe] \\
+\assignedtask{Interrogate Mandrake re: deviationism}{2026-01-19}{2026-01-21}{0}{JR}[mandrake] \\
+\assignedtask{Ice cream machine security}{2026-01-19}{2026-01-21}{0}{JR}[icecream] \\
+\assignedtask{Purity of Essence documentation}{2026-01-20}{2026-01-22}{0}{JR}[poe-doc] \\
+\assignedtask{Issue sidearms to all personnel}{2026-01-19}{2026-01-26}{0}{JR}[sidearms] \\
+\assignedtask{Women and children survival ratio}{2026-01-26}{2026-01-30}{0}{JR}[ratio] \\
+\ganttlink{poe-doc}{ratio}
+\ganttlink{sidearms}{ratio}
+
+% Operations Manual --------------------------------------------------------------
+\sectionsep
+\ganttgroup{7. Operations Manual}{2026-01-05}{2026-03-06} \\
+\assignedtask{Wing attack plan documentation}{2026-01-05}{2026-01-05}{100}{GC}[wing-docs] \\
+\assignedtask{CRM-114 operator manual}{2026-01-05}{2026-01-05}{100}{GC}[crm-manual] \\
+\assignedtask{Fail-safe procedure updates}{2026-01-05}{2026-01-05}{100}{GC}[failsafe] \\
+\assignedtask{Recall code protocol restore}{2026-01-07}{2026-01-07}{100}{GC}[recall-restore] \\
+\assignedtask{Strategic bomber integration guide}{2026-03-02}{2026-03-06}{0}{GC}[bomber-guide] \\
+\ganttlink{wing-docs}{crm-manual}
+\ganttlink{crm-manual}{failsafe}
+\ganttlink{failsafe}{recall-restore}
+
+% Mission Execution --------------------------------------------------------------
+\sectionsep
+\ganttgroup[name=grp-mission]{8. Mission Execution}{2026-02-02}{2026-02-10} \\
+\assignedtask{B-52 squadron deployment}{2026-02-02}{2026-02-02}{0}{MK}[deploy] \\
+\assignedtask{Attack profile configuration}{2026-02-03}{2026-02-03}{0}{MK}[attack-cfg] \\
+\assignedtask{Nuclear ordnance delivery}{2026-02-03}{2026-02-10}{0}{MK}[nuke-drop] \\
+\assignedtask{Target penetration assessment}{2026-02-03}{2026-02-10}{0}{MK}[penetrate] \\
+\assignedtask{Legacy bomber comparison runs}{2026-02-05}{2026-02-05}{0}{MK}[legacy] \\
+\assignedtask{Detonation yield validation}{2026-02-10}{2026-02-10}{0}{MK}[yield-valid] \\
+\ganttlink{grp-security}{grp-mission}
+\ganttlink{grp-targets}{grp-mission}
+\ganttlink{deploy}{attack-cfg}
+\ganttlink{attack-cfg}{nuke-drop}
+\ganttlink{attack-cfg}{penetrate}
+\ganttlink{nuke-drop}{yield-valid}
+\ganttlink{penetrate}{yield-valid}
+
+% Post-Strike Analysis -----------------------------------------------------------
+\sectionsep
+\ganttgroup[name=grp-analysis]{9. Post-Strike Analysis}{2026-02-10}{2026-02-22} \\
+\assignedtask{Fallout pattern modeling}{2026-02-10}{2026-02-15}{0}{DS}[fallout] \\
+\assignedtask{Casualty projections}{2026-02-10}{2026-02-15}{0}{DS}[casualties] \\
+\assignedtask{Radiation exposure statistics}{2026-02-15}{2026-02-22}{0}{DS}[radiation] \\
+\assignedtask{Soviet retaliation probability}{2026-02-15}{2026-02-22}{0}{DS}[retaliation] \\
+\assignedtask{Generate kill ratio visualizations}{2026-02-15}{2026-02-22}{0}{DS}[viz] \\
+\ganttlink{grp-mission}{grp-analysis}
+\ganttlink{fallout}{radiation}
+\ganttlink{casualties}{retaliation}
+
+% Pentagon Briefing --------------------------------------------------------------
+\sectionsep
+\ganttgroup[name=grp-brief]{10. Pentagon Briefing}{2026-02-22}{2026-03-14} \\
+\assignedtask{Abstract: nuclear apocalypse summary}{2026-02-22}{2026-02-25}{0}{PP}[abstract] \\
+\assignedtask{Introduction: communist threat}{2026-02-25}{2026-02-28}{0}{PP}[intro] \\
+\assignedtask{Background: mineshaft gap}{2026-02-28}{2026-03-03}{0}{PP}[background] \\
+\assignedtask{Methodology: megadeath calculations}{2026-03-03}{2026-03-06}{0}{PP}[method] \\
+\assignedtask{Implementation: Plan R activation}{2026-03-06}{2026-03-09}{0}{PP}[implement] \\
+\assignedtask{Results: acceptable losses}{2026-03-09}{2026-03-11}{0}{PP}[results] \\
+\assignedtask{Discussion: post-war survival}{2026-03-11}{2026-03-13}{0}{PP}[discussion] \\
+\assignedtask{Conclusion: peace on earth}{2026-03-13}{2026-03-14}{0}{PP}[conclude] \\
+\ganttlink{grp-analysis}{grp-brief}
+\ganttlink{abstract}{intro}
+\ganttlink{intro}{background}
+\ganttlink{background}{method}
+\ganttlink{method}{implement}
+\ganttlink{implement}{results}
+\ganttlink{results}{discussion}
+\ganttlink{discussion}{conclude}
+
+% Revisions & Final Approval -----------------------------------------------------
+\sectionsep
+\ganttgroup{11. Revisions \& Final Approval}{2026-03-14}{2026-04-04} \\
+\assignedtask{Address Joint Chiefs feedback}{2026-03-14}{2026-03-21}{0}{PP}[jcs] \\
+\assignedtask{Dr. Strangelove technical review}{2026-03-21}{2026-03-28}{0}{DS}[strange-rev] \\
+\assignedtask{General Turgidson blessing}{2026-03-28}{2026-03-31}{0}{BT}[turgidson] \\
+\assignedtask{Presidential authorization}{2026-03-31}{2026-04-01}{0}{MM}[potus] \\
+\assignedtask{Final proofreading (Premier call)}{2026-04-01}{2026-04-03}{0}{PP}[proof] \\
+\assignedtask{Submit to War Room}{2026-04-04}{2026-04-04}{0}{PP}[submit] \\
+\ganttlink{grp-brief}{jcs}
+\ganttlink{jcs}{strange-rev}
+\ganttlink{strange-rev}{turgidson}
+\ganttlink{turgidson}{potus}
+\ganttlink{potus}{proof}
+\ganttlink{proof}{submit}
+
+% Milestones ---------------------------------------------------------------------
+\sectionsep
+\ganttmilestone{M1: Wing Combat Ready}{2026-01-12} \\
+\ganttmilestone{M2: CRM-114 Operational}{2026-01-07} \\
+\ganttmilestone{M3: Doomsday Device Armed}{2026-01-30} \\
+\ganttmilestone{M4: Burpelson Secure}{2026-01-30} \\
+\ganttmilestone{M5: Nuclear Strike Complete}{2026-02-10} \\
+\ganttmilestone{M6: Fallout Analysis Done}{2026-02-22} \\
+\ganttmilestone{M7: Briefing Ready}{2026-03-14} \\
+\ganttmilestone{M8: Peace on Earth}{2026-04-04} \\
+
+\end{ganttchart}

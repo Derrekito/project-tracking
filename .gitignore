@@ -1,0 +1,33 @@
+# Override global gitignore's ignore-all pattern
+!*
+
+# Build artifacts
+build/
+output/
+reports/build/
+reports/output/
+reports/venv/
+
+# LaTeX auxiliary files (if not in build/)
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.synctex.gz
+
+# Editor files
+*.swp
+*~
+.vscode/
+.claude/
